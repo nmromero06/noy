@@ -1,0 +1,136 @@
+/* 1. Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #4b0029, #6f1d4b, #a32e5d);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden; /* Prevents side-scrolling on mobile */
+}
+
+/* 2. Background Layer */
+#bg {
+    position: fixed; /* Fixed so it stays behind during scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* 3. The Card Container */
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px; /* Slightly slimmer for better mobile proportion */
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    /* Flexbox inside the card to keep things stacked neatly */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* This controls the gap between ALL elements */
+}
+
+/* 4. Typography & Images */
+.card h1 {
+    font-size: 28px; /* Desktop default */
+    margin: 10px 0 0 0;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.card img {
+    display: block;
+    width: 180px; /* Perfectly sized for mobile/desktop */
+    height: auto;
+}
+
+/* 5. The Message Area */
+#message {
+    width: 100%;
+    min-height: 120px; /* Reduced from 200px to keep card compact */
+    font-size: 17px;
+    line-height: 1.6;
+    white-space: pre-line;
+    position: relative;
+    margin-top: 10px;
+}
+
+/* 6. Button Styling */
+button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff4d6d, #ff85a1);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* --- MOBILE SPECIFIC TWEAKS --- */
+@media (max-width: 480px) {
+    .card {
+        padding: 20px 15px;
+        width: 95%;
+    }
+
+    .card h1 {
+        font-size: 24px; /* Shrinks the big title for small screens */
+    }
+
+    #message {
+        font-size: 15px;
+        min-height: 100px;
+    }
+    
+    .card img {
+        width: 150px; /* Slightly smaller GIF for small phones */
+    }
+}
+
+/* 7. Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade {
+    animation: fadeIn 0.8s forwards;
+}
+
+.heart {
+    position: absolute;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+    100% { transform: translate(var(--x, 0px), -200px) scale(1.2); opacity: 0; }
+}
